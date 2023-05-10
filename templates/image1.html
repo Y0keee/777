@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http//www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http//www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="static/css/css.css" type="text/css" rel="stylesheet" />
+  <style>
+     .tree {margin: 0;padding: 0;background-color:#f2f2f2;overflow: hidden;}
+    /*隐藏input*/
+    .tree li input{position: absolute;left: 0;opacity: 0;z-index: 2;cursor: pointer;height: 1em;width:1em;top: 0;}
+    /*所有菜单项设置统一样式*/
+    .tree li {position: relative;list-style: none;}
+    /*一级菜单加下边线*/
+    .tree>li{border-bottom: 1px solid #d9d9d9;}
+    /*给有子菜单的菜单项添加背景图标*/
+    .tree li label {max-width:999px;cursor: pointer;display: block;margin:0 0 0 -50px;padding: 15px 10px 15px 70px;background: url(../../images/cp-detail-arrow-b.png) no-repeat right center;background-position:95% 50%;white-space:nowrap;overflow:hidden;text-overflow: ellipsis; }
+    .tree li label:hover,li label:focus{background-color:#a7a7a7;color:#fff;}
+    /*清除所有展开的子菜单的display*/
+    .tree li input + ol{display: none;}
+    /*当input被选中时，给所有展开的子菜单设置样式*/
+    .tree input:checked + ol {padding-left:14px;height: auto;display: block;}
+    .tree input:checked + ol > li { height: auto;}
+    /*末层菜单为A标签，设置样式*/
+    .tree li.file a{margin:0 -10px 0 -50px;padding: 15px 20px 15px 70px;text-decoration:none;display: block;color:#333333;white-space:nowrap;overflow:hidden;text-overflow: ellipsis;}
+    .tree li.file a:hover,li.file a:focus{background-color:#a7a7a7;color:#fff;}
+    /*不同层级的菜单字体大小不同*/
+    .tree .folderOne{font-size: 22px;}
+    .tree .folderTwo{font-size:22px;}
+    .tree .folderThree{font-size:22px;}
+    </style>
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<div class="head">
+     <center> <font size="8px" color="white" face="YouYuan">基于U-Net++的皮肤镜图像系统</font></center>
+</div>
+
+<div class="main">
+  <div class="left">
+<ol class="tree">
+       <li>
+                 <li>
+                   <label for="subfolder2" class="folderTwo">图像分割</label> <input type="checkbox" id="subfolder2"  />
+                   <ol>
+                       <li class="file folderThree"><a href="{{url_for('image1')}}">单张分割</a></li>
+                       <li class="file folderThree"><a href="{{url_for('image')}}">多张分割</a></li>
+                   </ol>
+               </li>
+
+       </li>
+</ol>
+  </div>
+  <div class="rigt">
+      <div class="rm"><font size="5px" face="YouYuan">当前位置：<a href="{{url_for('index')}}" style="text-decoration:none;color:black;">首页</a>>>图像分割>>单张分割</font></div>
+    <div class="rp">
+    <div class="sub_ip">
+        <div class="sub_ip1">
+            <div style="margin-top:50px;">
+            <form method="POST" enctype="multipart/form-data">
+                <div class="div1" style="margin-left: 10%">
+                <div class="div2" ><font size="5px"> 选择单张图片</font></div>
+                <input type="file" name="file[]"  class="inputstyle"/>
+                </div>
+                 <div class="div1">
+                     <div class="div2"><font size="5px">上传分割</font>
+                    <input type="submit" class="inputstyle"/></div>
+                 </div>
+
+                 <br>
+                <br>
+                <br>
+
+
+                <div style="display: flex;">
+                    <table border="0" style="flex: 1;">
+                {% for file in FILE_NAMES  %}
+<!--         <td><img src='./'+{{file}}></td>-->
+                <tr>
+                    <td>
+                        <a href='{{file}}' download="w3logo1" style="text-decoration:none;color:white;">
+                            <img src='{{file}}' style="width: 100%;height: 100%" alt="Image">
+                        </a>
+                    </td>
+<!--                    <td>-->
+<!--                        <div class="div1">-->
+<!--                            <div class="div2">-->
+<!--                                <a href='{{file}}' download="w3logo1" style="text-decoration:none;color:white;"><font size="5px">下载原图</font></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </td>-->
+                </tr>
+                 {% endfor  %}
+
+            </table>
+            <table border="0" style="flex: 1;">
+                    {% for mask in MASK_NAMES  %}
+                <tr>
+                    <td>
+                        <a href='{{mask}}' download="w3logo" style="text-decoration:none;color:white;">
+                            <img src='{{mask}}' style="width:100%;height: 100%" alt="Image">
+                        </a>
+                    </td>
+<!--                   <td>-->
+<!--                       <div class="div1">-->
+<!--                            <div class="div2">-->
+<!--                                <a href='{{mask}}' download="w3logo" style="text-decoration:none;color:white;"><font size="5px">保存结果</font></a>-->
+<!--                            </div>-->
+<!--                       </div>-->
+<!--                   </td>-->
+               </tr>
+                {% endfor  %}
+            </table>
+                </div>
+
+
+
+            </form>
+
+            </div>
+            <div style="margin-left: 12%">
+                <font size="5px" color="#00a7d0" >分割结果</font><font size="5px">{{msg}}</font>
+            </div>
+
+            </div>
+
+        </div>
+
+</div>
+
+    </div>
+</div>
+
+<div class="footbox">
+
+</div>
+</body>
+</html>

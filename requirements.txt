@@ -1,0 +1,15 @@
+einops==0.4.1          pip
+Flask==2.2.2
+matplotlib==3.3.4
+numpy==1.23.5           pip
+numpy==1.24.2
+opencv_python==4.5.1.48  
+Pillow==9.4.0            pip
+--Pillow==9.5.0
+PyYAML==6.0              pip
+PyYAML==6.0
+scikit_learn==1.2.2      pip
+scipy==1.10.1            pip
+torch==1.8.0+cuda         pip
+torchvision==0.9.0+cuda   pip
+tqdm==4.61.2             pip
